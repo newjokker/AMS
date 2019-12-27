@@ -4,18 +4,6 @@ using namespace std;
 
 #define MAX_NUM 1000
 
-/*
- * 要实现的功能
-    * 添加联系人
-    * 显示联系人
-    * 删除联系人
-    * 查找联系人
-    * 修改联系人
-    * 清空联系人
-    * 退出通讯录
- * */
-
-// 显示菜单
 void showMenu()
 {
     cout << "************************" << endl;
@@ -29,14 +17,13 @@ void showMenu()
     cout << "************************" << endl;
 }
 
-// 联系人结构体
 struct Person
 {
-    int m_Sex;
-    int m_Age;
-    string m_Name;
-    string m_Phone;
-    string m_Addr;
+    int m_Sex=0;
+    int m_Age=0;
+    string m_Name="";
+    string m_Phone="";
+    string m_Addr="";
 };
 
 struct Addressbooks
@@ -88,12 +75,70 @@ void addPerson(Addressbooks *abs)
     }
 }
 
+void showPerson(Addressbooks *abs)
+{
+    cout << "--------------------------------------" <<endl;
+    for(int i=0;i<abs->m_Size;i++)
+    {
+        cout << "name :" <<endl;
+        cout << "sex :" <<endl;
+        cout << "age :" <<endl;
+        cout << "address :" <<endl;
+        cout << "--------------------------------------" <<endl;
+    }
+}
+
+void deletePerson(Addressbooks *abs)
+{
+    string name;
+    Person *person;
+    cout << "delete person name" << endl;
+    cin >> name;
+    for(int i=0;i<abs->m_Size;i++)
+    {
+        if (abs->PersonArray[i].m_Name == name)
+        {
+            for(int j=i;j<abs->m_Size;j++)
+            {
+                person = &abs->PersonArray[i];
+                abs->PersonArray[i+1] = *person;
+                abs->m_Size--;
+            }
+        }
+    }
+}
+
+void findPerson(Addressbooks *abs)
+{
+    Person person;
+    string name;
+    cin >> name;
+
+    for(int i=0;i<abs->m_Size;i++)
+    {
+        if (abs->PersonArray[i].m_Name == name)
+        {
+            person = abs->PersonArray[i];
+            cout << "--------------------------------------" <<endl;
+            cout << "name :" <<endl;
+            cout << "sex :" <<endl;
+            cout << "age :" <<endl;
+            cout << "address :" <<endl;
+            cout << "--------------------------------------" <<endl;
+        }
+    }
+}
+
+void clear(Addressbooks *abs)
+ {
+    abs->m_Size=0;
+ }
+
 int main() {
 
-    int select = 0; // 用户选择输入变量
+    int select = 0;
 
     Addressbooks abs;
-    abs.m_Size = 0;
 
     while (true)
     {
@@ -105,26 +150,28 @@ int main() {
         {
             case 1:
                 addPerson(&abs);
-                system("pause");
-                system("cls");  // 清屏操作
                 break;
             case 2:
+                showPerson(&abs);
                 break;
             case 3:
+                deletePerson(&abs);
                 break;
             case 4:
+                findPerson(&abs);
                 break;
             case 5:
                 break;
             case 6:
+                clear(&abs);
                 break;
             case 0:
                 cout << "see you later" << endl;
-                system("pause");
                 return 0;
             default:
                 break;
         }
-
+        system("pause");
+        system("cls");  // 清屏操作
     }
 }
