@@ -82,6 +82,7 @@ void showPerson(Addressbooks *abs)
         cout << "name :" << abs->PersonArray[i].m_Name << endl;
         cout << "sex :" << abs->PersonArray[i].m_Sex << endl;
         cout << "age :" << abs->PersonArray[i].m_Age << endl;
+        cout << "phone :" << abs->PersonArray[i].m_Phone << endl;
         cout << "address :" << abs->PersonArray[i].m_Addr << endl;
         cout << "--------------------------------------" << endl;
     }
