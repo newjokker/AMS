@@ -77,14 +77,13 @@ void addPerson(Addressbooks *abs)
 
 void showPerson(Addressbooks *abs)
 {
-    cout << "--------------------------------------" <<endl;
     for(int i=0;i<abs->m_Size;i++)
     {
-        cout << "name :" <<endl;
-        cout << "sex :" <<endl;
-        cout << "age :" <<endl;
-        cout << "address :" <<endl;
-        cout << "--------------------------------------" <<endl;
+        cout << "name :" << abs->PersonArray[i].m_Name << endl;
+        cout << "sex :" << abs->PersonArray[i].m_Sex << endl;
+        cout << "age :" << abs->PersonArray[i].m_Age << endl;
+        cout << "address :" << abs->PersonArray[i].m_Addr << endl;
+        cout << "--------------------------------------" << endl;
     }
 }
 
@@ -100,8 +99,7 @@ void deletePerson(Addressbooks *abs)
         {
             for(int j=i;j<abs->m_Size;j++)
             {
-                person = &abs->PersonArray[i];
-                abs->PersonArray[i+1] = *person;
+                abs->PersonArray[i] = abs->PersonArray[i+1];  // 为什么可以这么直接赋值？
                 abs->m_Size--;
             }
         }
